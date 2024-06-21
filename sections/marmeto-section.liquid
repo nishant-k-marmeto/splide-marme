@@ -1,0 +1,175 @@
+<section class="crousel-container custom_margin-{{ section.id }}">
+  <div class="container container--md">
+    <div class="">
+      <h4 class="text-center pt-1 pb-2">{{ section.settings.heading }}</h4>
+    </div>
+  </div>
+  
+  <marmeto-crousel data-options='{autoWidth: true,
+      arrows: false,
+      pagination: {{ section.settings.pagination_dot }},
+      focus: 0,
+      omitEnd: true,
+      perPage: 3}'>
+    <div class="crousel-content-inner splide__track">
+      <div class="carousel splide__list">
+        {% for block in section.blocks %}
+        <div class="carousel-cell splide__slide">
+          <a href="{{ block.settings.content_url }}"> {% render 'marmeto-image'
+            forloop: forloop,
+            desktopImage: block.settings.image_desktop,
+            mobileImage: block.settings.image_mobile,
+            imageClass: 'image-class',
+            pictureClass: 'picture-class'
+           %} </a>
+          <div class="sub-tile-heading" style="display: {{ section.settings.button_visibility }}">
+            <a href="{{ block.settings.button_url }}"> <button class="button-primary custom-class">{{ block.settings.sub_text }}</button></a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </marmeto-crousel>
+  
+</section>
+
+{% style %}
+  .custom_class {
+    font-size: {{ section.settings.font-size }}px;
+    color: {{ section.settings.color }};
+    font-weight: bold;
+  }
+  .custom_margin-{{ section.id }} {
+    margin-top: {{ section.settings.margin-top }}px;
+    margin-bottom: {{ section.settings.margin-bottom }}px;
+  }
+  .carousel-cell img {
+    object-fit: cover;
+    border-radius:{{ section.settings.border_radius }}px;
+  }
+  
+{% endstyle %}
+{% schema %}
+
+    {
+      "name": "Deal Saver",
+      "tag": "section",
+      "settings": [
+        {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "Deals of the day"
+        },
+        {
+        "type": "checkbox",
+        "label": "Pagination Dot",
+        "id": "pagination_dot",
+        "default": true,
+        "info": "Select to enable the pagination dots"
+        },
+        {
+          "type": "range",
+          "label": "Margin Top",
+          "id": "margin-top",
+          "step": 10,
+          "min":0,
+          "max": 100,
+          "default": 0
+          },
+          {
+            "type": "range",
+            "label": "Margin Bottom",
+            "id": "margin-bottom",
+            "step": 10,
+            "min":0,
+            "max": 100,
+            "default": 0
+          },
+          {
+            "type": "range",
+            "label": "Heading Font Size",
+            "id": "font-size",
+            "step": 1,
+            "min":16,
+            "max": 28,
+            "default": 20
+          },
+          {
+            "type": "color",
+            "label": "Heading Font Color",
+            "id": "color",
+            "default": "#77350F"
+          },
+          {
+            "type": "radio",
+            "label": "Button Visibility",
+            "id": "button_visibility",
+            "options": [
+              {
+                "label": "Hide",
+                "value": "None"
+              },
+              {
+                "label": "Unhide",
+                "value": "block"
+              }
+            ]
+          },
+          {
+            "type": "range",
+            "label": "Border Radius",
+            "id": "border_radius",
+            "default": 0,
+            "info": "Set Border radius",
+            "min": 0,
+            "max": 30,
+            "step": 2,
+            "unit": "px"
+          }
+      ],
+      "blocks": [
+        {
+          "name": "Slide",
+          "type": "slide",
+          "limit": 18,
+          "settings": [
+            {
+              "type": "image_picker",
+              "id": "image_mobile",
+              "label": "Image Upload",
+              "info":"750*850 Recommended"
+            },
+            {
+              "type": "image_picker",
+              "id": "image_desktop",
+              "label": "Image Upload",
+              "info":"1800*600 Recommended"
+            },
+            {
+              "type": "text",
+              "id": "sub_text",
+              "label": "Button Text",
+              "placeholder": "Button Text"
+            },
+            {
+              "type": "url",
+              "label": "Select Redirection",
+              "id": "content_url"
+            },
+            {
+              "type": "url",
+              "label": "Button Redirection",
+              "id": "button_url"
+            }
+          ]
+        }
+      ],
+      "presets": [
+        {
+          "name": "Deal Saver"
+        }
+      ]
+    }
+
+{% endschema %}
