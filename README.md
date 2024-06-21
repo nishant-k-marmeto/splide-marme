@@ -1,11 +1,11 @@
-# Component Parallax Image Text
+# Component Slider Section
 
 This component provides a basic outline with minimal styling. To ensure it matches your design specifications, additional custom styling may be required.
 
 # Preview
 
-![alt text](image.png)
 ![alt text](image-1.png)
+![alt text](image.png)
 
 
 ## Features
